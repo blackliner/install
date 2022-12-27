@@ -10,10 +10,12 @@ distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
 
 sudo apt-get update
 
-
-curl -sSL get.docker.com | sudo bash
-sudo systemctl --now enable docker
-sudo docker run hello-world
+if ! command -v docker &> /dev/null
+then
+    curl -sSL get.docker.com | sudo bash
+    sudo systemctl --now enable docker
+    sudo docker run hello-world
+fi
 
 sudo apt-get install -y nvidia-docker2
 sudo systemctl restart docker
