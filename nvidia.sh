@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euxo pipefail
+set -euo pipefail
 
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
       && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
@@ -20,5 +20,6 @@ fi
 sudo apt-get install -y nvidia-docker2
 sudo systemctl restart docker
 
-sudo docker run --rm -it --gpus all blackliner/gpu_burn:latest
+echo "Now run:"
+echo "sudo docker run --rm -it --gpus all blackliner/gpu_burn:latest"
 
