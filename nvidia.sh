@@ -20,3 +20,5 @@ fi
 sudo apt-get install -y nvidia-docker2
 sudo systemctl restart docker
 
+sudo docker run --rm -it --gpus all blackliner/gpu_burn:latest
+
