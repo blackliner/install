@@ -44,4 +44,24 @@ tee "$APT_CONF_FILE" >/dev/null <<EOF
 Acquire::http::Proxy-Auto-Detect "$DETECT_SCRIPT";
 EOF
 
+# === Check for conflicting proxy settings ===
+for file in "$APT_CONF_DIR"/*; do
+    # Skip the file we just created
+    [[ "$file" == "$APT_CONF_FILE" ]] && continue
+    # Skip backup files
+    [[ "$file" == *.bak ]] && continue
+
+    if grep -Eq '^\s*Acquire::http::Proxy\s' "$file"; then
+        echo "======================================================"
+        echo "WARNING: File '$file' contains Acquire::http::Proxy settings."
+        echo "------------------------------------------------------"
+        cat "$file"
+        echo "------------------------------------------------------"
+        echo "Suggestion: move this file to a backup location to avoid conflicts, e.g.:"
+        echo "  sudo mv '$file' '${file}.bak'"
+        echo "======================================================"
+        echo
+    fi
+done
+
 echo "[SUCCESS] Proxy auto-detect configuration installed."
