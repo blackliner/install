@@ -14,7 +14,7 @@ tee "$DETECT_SCRIPT" >/dev/null <<'EOF'
 # Proxy auto-detection script for APT
 # Expected output: "http://proxy:port" or "DIRECT"
 
-TARGET_HOST="apt.proxy.local"
+TARGET_HOST="apt.proxy.local.berchtold.live"
 TARGET_PORT=80
 
 check_reachable() {
