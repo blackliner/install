@@ -20,11 +20,10 @@ TARGET_PORT=80
 check_reachable() {
     # Prefer nc if available
     if command -v nc >/dev/null 2>&1; then
-        nc -z -w2 "$TARGET_HOST" "$TARGET_PORT" >/dev/null 2>&1 && return 0
-    fi
+        nc -z -w1 "$TARGET_HOST" "$TARGET_PORT" >/dev/null 2>&1 && return 0
     # Fallback: ping
-    if command -v ping >/dev/null 2>&1; then
-        ping -c1 -W2 "$TARGET_HOST" >/dev/null 2>&1 && return 0
+    elif command -v ping >/dev/null 2>&1; then
+        ping -c1 -W1 "$TARGET_HOST" >/dev/null 2>&1 && return 0
     fi
     return 1
 }
