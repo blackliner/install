@@ -30,7 +30,7 @@ check_reachable() {
 }
 
 if check_reachable; then
-    echo "http://$TARGET_HOST"
+    echo "http://$TARGET_HOST:$TARGET_PORT"
 else
     echo "DIRECT"
 fi
